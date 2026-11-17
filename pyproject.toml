@@ -1,0 +1,19 @@
+[project]
+name = "todo-list"
+version = "0.1.0"
+description = "A basic TODO list to create, read, update and delete tasks"
+readme = "README.md"
+authors = [
+    { name = "MrEmcore", email = "ryan.hughes9@outlook.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.163.1",
+]
+
+[project.scripts]
+todo-list = "todo_list:main"
+
+[build-system]
+requires = ["uv_build>=0.13.9,<0.14.0"]
+build-backend = "uv_build"
