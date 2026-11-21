@@ -27,5 +27,11 @@ def update_task(task, process):
 def delete_task(task):
   with sqlite3.connect(DB_PATH) as conn:
       conn.execute('DELETE FROM tasks WHERE task_name = ?', (task,))
+      return f"task deleted: {task}"
+
+def clear_all():
+   with sqlite3.connect(DB_PATH) as conn:
+      conn.execute('DELETE FROM tasks')
+      return "All Tasks Cleared"
 
 init_db()
