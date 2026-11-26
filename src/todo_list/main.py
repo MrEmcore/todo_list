@@ -8,7 +8,7 @@ app = FastAPI()
 @style_inputs
 @validate_process
 def add_task(task, process):
-    return db.add_task(task.title(), process.lower())
+    return db.add_task(task, process)
     
 @app.get("/read_tasks")
 def read_tasks():
@@ -21,13 +21,15 @@ def read_tasks():
 @app.post("/update_task")
 @style_inputs
 @validate_process
+# TODO: add task check before update
 def update_task(task, process):
-    return db.update_task(task.title(), process.lower())
+    return db.update_task(task, process)
 
 @app.post("/delete_task")
 @style_inputs
+# TODO: add task check before delete
 def delete_task(task):
-    return db.delete_task(task.title())
+    return db.delete_task(task)
 
 @app.post("/clear_all")
 def clear_all():
