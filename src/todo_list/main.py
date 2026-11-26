@@ -1,37 +1,34 @@
 from fastapi import FastAPI
 from . import db
-from .utils.utils import validate_process
+from .utils.utils import validate_process, style_inputs
 
 app = FastAPI()
 
 @app.post("/add_task")
+@style_inputs
 @validate_process
 def add_task(task, process):
-    process = process.lower()
-    task = task.title()
-    return db.add_task(task, process)
+    return db.add_task(task.title(), process.lower())
     
 @app.get("/read_tasks")
 def read_tasks():
     tasks = db.read_tasks()
     if len(tasks) < 1:
-        return "Currently no tasks"
+        return "There are currently no tasks stored."
     else:
         return tasks
 
 @app.post("/update_task")
+@style_inputs
 @validate_process
 def update_task(task, process):
-    return db.update_task(task, process)
+    return db.update_task(task.title(), process.lower())
 
 @app.post("/delete_task")
+@style_inputs
 def delete_task(task):
-    return db.delete_task(task)
+    return db.delete_task(task.title())
 
 @app.post("/clear_all")
 def clear_all():
     return db.clear_all()
-
-
-# if __name__ == "__main__":
-#     add_task("Do the dishes", "Pending")
